@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c9c5b8 transparent;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-body antialiased;
+}
+
+::selection {
+  background: #3654f5;
+  color: #ffffff;
+}
+
+/* ---------- Custom cursor ---------- */
+@media (pointer: fine) {
+  .cursor-none-desktop {
+    cursor: none;
+  }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #14151a;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #14151a;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
+  mix-blend-mode: difference;
+}
+
+/* ---------- Utility layers ---------- */
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-6 md:px-10;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-accent;
+  }
+
+  .section-heading {
+    @apply font-display text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink;
+  }
+
+  .card-surface {
+    @apply rounded-xl2 border border-border bg-card shadow-[0_1px_2px_rgba(20,21,26,0.04)];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-sm text-paper transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink/15 bg-transparent px-6 py-3 font-mono text-sm text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-ink/40;
+  }
+
+  .node-divider {
+    @apply relative flex items-center gap-3;
+  }
+
+  .node-divider::after {
+    content: "";
+    @apply h-px flex-1 bg-border;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #3654f5;
+  outline-offset: 3px;
+}
